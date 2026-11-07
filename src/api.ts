@@ -336,7 +336,7 @@ route("GET", "/api/logs/stream", async ({ req, url }) => {
   const filters = logFilters(url);
   const enc = new TextEncoder();
   let unsub: (() => void) | undefined;
-  let timer: number | undefined;
+  let timer: ReturnType<typeof setInterval> | undefined;
   const stream = new ReadableStream({
     start(ctrl) {
       ctrl.enqueue(enc.encode("retry: 3000\n\n"));

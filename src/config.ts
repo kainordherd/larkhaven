@@ -12,6 +12,7 @@ const port = num("PORT", 8000);
 const baseUrl = env("BASE_URL", `http://localhost:${port}`).replace(/\/+$/, "");
 
 export const config = {
+  host: env("HOST", "0.0.0.0"),
   port,
   baseUrl,
   origin: new URL(baseUrl).origin,

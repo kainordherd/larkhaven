@@ -5,6 +5,7 @@ import { log } from "./src/logs.ts";
 assertConfig();
 
 Deno.serve({
+  hostname: config.host,
   port: config.port,
   onListen: ({ hostname, port }) => {
     log("info", "system", `meowhook listening on ${hostname}:${port} (${config.baseUrl})`, {

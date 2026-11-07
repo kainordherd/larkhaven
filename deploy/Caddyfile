@@ -1,0 +1,6 @@
+# Append to /home/debian/Caddyfile on the deployment host.
+# Internal TLS matches the existing origin behind the public proxy.
+larkhaven.flowecho.org {
+    tls internal
+    reverse_proxy http://127.0.0.1:5843
+}

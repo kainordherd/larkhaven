@@ -1,0 +1,24 @@
+[Unit]
+Description=Larkhaven webhook relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=debian
+# The deployment account's primary group is GID 1000.
+Group=1000
+WorkingDirectory=/home/debian/larkhaven
+EnvironmentFile=/home/debian/larkhaven/.env
+ExecStart=/home/debian/.deno/bin/deno task start
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/home/debian/larkhaven/data
+Environment=DENO_DIR=/home/debian/larkhaven/data/deno-cache
+
+[Install]
+WantedBy=multi-user.target

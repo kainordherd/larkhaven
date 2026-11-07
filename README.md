@@ -19,6 +19,9 @@ code flow + PKCE; works with any OIDC-compliant IdP).
 
 Permissions needed: `--allow-net --allow-env --allow-read --allow-write` (KV file under `./data`).
 
+See [host deployment](deploy/README.md) for the systemd and Caddy setup.
+`HOST` controls the listen address (default `0.0.0.0`).
+
 | Variable | Default | Notes |
 | --- | --- | --- |
 | `BASE_URL` | `http://localhost:$PORT` | Public URL. Drives the redirect URI, secure cookies and the CSRF origin check. |
