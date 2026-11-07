@@ -38,6 +38,16 @@ async function mkTunnel(extra: Record<string, unknown> = {}) {
 
 const opts = { sanitizeOps: false, sanitizeResources: false };
 
+Deno.test("consumer guide is public and supports HEAD", async () => {
+  const response = await call("/llms.txt");
+  assertEquals(response.status, 200);
+  assertEquals(response.headers.get("content-type"), "text/plain; charset=utf-8");
+  assertEquals(await response.text(), await Deno.readTextFile("./llms.txt"));
+  const head = await call("/llms.txt", { method: "HEAD" });
+  assertEquals(head.status, 200);
+  assertEquals(await head.text(), "");
+});
+
 Deno.test({ name: "api requires auth", ...opts }, async () => {
   assertEquals((await call("/api/tunnels")).status, 401);
   assertEquals((await call("/api/logs")).status, 401);

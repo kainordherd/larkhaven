@@ -30,6 +30,8 @@ Permissions needed: `--allow-net --allow-env --allow-read --allow-write` (KV fil
 
 ## Using a tunnel
 
+For consumer integrations, read [llms.txt](llms.txt), also served at `/llms.txt`.
+
 Create a tunnel in the UI. You get:
 
 - **Webhook URL** `POST|GET|… <BASE_URL>/hook/<tunnelId>[/any/sub/path]` — the unguessable id is the

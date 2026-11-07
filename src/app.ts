@@ -30,6 +30,12 @@ async function route(req: Request, info: Deno.ServeHandlerInfo): Promise<Respons
   const ip = clientIp(req, info);
   try {
     if (url.pathname === "/healthz") return json({ ok: true });
+    if (url.pathname === "/llms.txt" && (req.method === "GET" || req.method === "HEAD")) {
+      const text = await Deno.readTextFile(new URL("../llms.txt", import.meta.url));
+      return new Response(req.method === "HEAD" ? null : text, {
+        headers: { "content-type": "text/plain; charset=utf-8" },
+      });
+    }
 
     const hook = HOOK.exec({ pathname: url.pathname });
     if (hook) {
